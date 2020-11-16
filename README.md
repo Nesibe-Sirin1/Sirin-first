@@ -1,9 +1,17 @@
 # Sirin-first
 database
-ccc
+Sequelize kurulumu
 
-111
-sdfg
-deneme2
-abc 
-abcdef
+Database Connection
+
+Model Tanımlama
+
+Inserting Data
+
+Selecting All
+
+Selecting Single
+
+Updating Product
+
+Deleting Product
