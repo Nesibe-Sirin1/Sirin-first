@@ -2,7 +2,8 @@ const Product = require('../models/product');
 const Category = require('../models/category');
 
 exports.getIndex = (req, res, next) => {
-
+    //console.log(req.isAuthenticated);
+    console.log(req.cookies.Authenticated);
     Product.findAll(
         {
             attributes: ['id', 'name', 'price', 'imageUrl'],
@@ -15,7 +16,8 @@ exports.getIndex = (req, res, next) => {
                         title: 'Shopping',
                         products: products,
                         categories: categories,
-                        path: '/'
+                        path: '/',
+                        isAuthenticated: req.cookies.isAuthenticated == 'true'
                     });
                 })
                 .catch((err) => {
@@ -178,10 +180,22 @@ exports.postCartItemDelete = (req, res, next) => {
 }
 
 exports.getOrders = (req, res, next) => {
-    res.render('shop/orders', {
-        title: 'Orders',
-        path: '/orders'
-    });
+
+    req.user
+        .getOrders({ include: ['products'] })
+        .then(orders => {
+            console.log(orders);
+
+            res.render('shop/orders', {
+                title: 'Orders',
+                path: '/orders',
+                orders: orders
+            });
+
+        })
+        .catch(err => console.log(err));
+
+
 }
 
 exports.postOrder = (req, res, next) => {
@@ -214,12 +228,6 @@ exports.postOrder = (req, res, next) => {
         .catch(err => {
             console.log(err);
         });
-
-
-    res.render('shop/orders', {
-        title: 'Orders',
-        path: '/orders'
-    });
 }
 
 

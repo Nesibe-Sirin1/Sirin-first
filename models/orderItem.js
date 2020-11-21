@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 
 const sequelize = require('../utility/database');
 
-const OrderItem = sequelize.define('OrderItem',{
+const OrderItem = sequelize.define('orderItem', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -11,7 +11,6 @@ const OrderItem = sequelize.define('OrderItem',{
     },
     quantity: Sequelize.INTEGER,
     price: Sequelize.DOUBLE
-
 });
 
-module.exports =OrderItem;
+module.exports = OrderItem;
